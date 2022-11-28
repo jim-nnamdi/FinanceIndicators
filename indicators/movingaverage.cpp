@@ -1,4 +1,7 @@
 #include<iostream>
+#include<vector>
+
+using namespace std;
 
 /*
 * Sample algorithm for calculating the mean average
@@ -10,7 +13,9 @@ class MovingAverage {
     public:
         static const int meanavgsize = 5;
         double determineAverageValues(double pricetrends[meanavgsize], int meanperiods);
-        int pricesOverCertainPeriods();
+        
+        template <typename T>
+        T pricesOverCertainPeriods(vector<T> prices[5]);
 };
 
 double MovingAverage::determineAverageValues(double pricetrends[meanavgsize],int meanperiods) {
@@ -19,19 +24,31 @@ double MovingAverage::determineAverageValues(double pricetrends[meanavgsize],int
         int sum = 0;
         for (int j = o; j < o + meanperiods; j ++){
             sum += (int)pricetrends[j];
-            std::cout << pricetrends[j] << std::endl;
+            cout << pricetrends[j] << endl;
         }
         double avg = (double) sum/meanperiods;
-        std::cout << "moving average: " << avg << std::endl; 
+        cout << "moving average: " << avg << endl; 
     }
     return avg;
 }
 
+// this is at a minimal level ...
+template <typename T>
+T MovingAverage::pricesOverCertainPeriods(vector<T> prices[5]) {
+    for(auto i : prices){
+        cout << i << endl;
+    }
+}
+
 
 int main(){
-    MovingAverage ma;
+
+    vector<int> vecarr = {1,2,3,4,5};
     double prices[5] = {1.56,2.0,3.54,4.0,5.93};
+
+    MovingAverage ma;
     ma.determineAverageValues(prices, 3);
+    // ma.pricesOverCertainPeriods(vecarr);
     
     return 0;
 }
