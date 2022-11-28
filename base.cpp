@@ -9,20 +9,19 @@
 class MovingAverage {
     public:
         static const int meanavgsize = 5;
-        int determineAverageValues(int pricetrends[meanavgsize],int meanperiods);
+        double determineAverageValues(double pricetrends[meanavgsize], int meanperiods);
         int pricesOverCertainPeriods();
 };
 
-// declare the functions from inside the class
-int MovingAverage::determineAverageValues(int pricetrends[meanavgsize],int meanperiods) {
-    int avg = 0;
+double MovingAverage::determineAverageValues(double pricetrends[meanavgsize],int meanperiods) {
+    double avg = 0;
     for(int o = 0; o < meanavgsize - meanperiods; o++){
         int sum = 0;
         for (int j = o; j < o + meanperiods; j ++){
-            sum = sum + pricetrends[j];
+            sum += (int)pricetrends[j];
             std::cout << pricetrends[j] << std::endl;
         }
-        int avg = sum/meanperiods;
+        double avg = (double) sum/meanperiods;
         std::cout << "moving average: " << avg << std::endl; 
     }
     return avg;
@@ -31,7 +30,8 @@ int MovingAverage::determineAverageValues(int pricetrends[meanavgsize],int meanp
 
 int main(){
     MovingAverage ma;
-
-    int prices[5] = {1,2,3,4,5};
-   ma.determineAverageValues(prices, 3);
+    double prices[5] = {1.56,2.0,3.54,4.0,5.93};
+    ma.determineAverageValues(prices, 3);
+    
+    return 0;
 }
