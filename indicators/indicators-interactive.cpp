@@ -82,4 +82,5 @@ int main(){
     MovingAverageInteractive interactiveTradeview;
     interactiveTradeview.determineMovingAverage();
     interactiveTradeview.pricesOverDiffPeriods(arr);
+    interactiveTradeview.determineMAOnMarketShift();
 }
