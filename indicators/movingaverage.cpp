@@ -13,9 +13,10 @@ class MovingAverage {
     public:
         static const int meanavgsize = 5;
         double determineAverageValues(double pricetrends[meanavgsize], int meanperiods);
+
         
         template <typename T>
-        T pricesOverCertainPeriods(vector<T> prices[5]);
+        void pricesOverCertainPeriods(vector<T> prices);
 };
 
 double MovingAverage::determineAverageValues(double pricetrends[meanavgsize],int meanperiods) {
@@ -34,21 +35,21 @@ double MovingAverage::determineAverageValues(double pricetrends[meanavgsize],int
 
 // this is at a minimal level ...
 template <typename T>
-T MovingAverage::pricesOverCertainPeriods(vector<T> prices[5]) {
-    for(auto i : prices){
-        cout << i << endl;
+void MovingAverage::pricesOverCertainPeriods(vector<T> prices) {
+    for(auto& it : prices){
+        cout << it << endl;
     }
 }
 
 
 int main(){
 
-    vector<int> vecarr = {1,2,3,4,5};
+    vector<double> vecarr = {1.435,2.9923,3.2332,4.009,5.0091};
     double prices[5] = {1.56,2.0,3.54,4.0,5.93};
 
     MovingAverage ma;
     ma.determineAverageValues(prices, 3);
-    // ma.pricesOverCertainPeriods(vecarr);
+    ma.pricesOverCertainPeriods(vecarr);
     
     return 0;
 }
