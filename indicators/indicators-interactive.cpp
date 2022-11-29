@@ -7,9 +7,8 @@ using namespace std;
 class MovingAverageInteractive {
     public:
         double determineMovingAverage();
-
-        template<typename T>
-        void pricesOverDiffPeriods(vector<T> arr);
+        double determineMAOnMarketShift();
+        void pricesOverDiffPeriods(vector<int> arr);
 };
 
 double MovingAverageInteractive::determineMovingAverage() {
@@ -40,10 +39,40 @@ double MovingAverageInteractive::determineMovingAverage() {
     return avg;
 }
 
-template<typename T>
-void pricesOverDiffPeriods(vector<T> arr) {
-    for(auto& it : arr){
-        cout << it << endl;
+double MovingaverageInteractive::determineMAOnMarketShift(){
+    vector<int> initialMovingPrices;
+    int sum, meanperiod, movingPricesSize; 
+    double avg;
+
+    cout << "size of the moving price"<< endl;
+    cin >> movingPricesSize;
+
+    cout << "set the initial moving prices"<< endl;
+    for (int i =0; i < movingPricesSize; i++) {
+        cin >> initialMovingPrices;
+    }
+
+    vector<int>::iterator vit;
+    for(vit = initialMovingPrices.begin(); vit != initialMovingPrices.end(); ++vit){
+        cout << *initialMovingPrices << endl;
+    }
+
+    if(initialMovingPrices.size() <= movingPricesSize) {
+        for(int x = 0; x < initialMovingPrices.size(); x++){
+            sum = 0;
+            for(int y = x; y = x + meanperiod; y++){
+                sum += initialMovingPrices[y];
+                avg = (double) sum/meanperiod;
+                cout << "moving average is: "<< avg << endl;
+            }
+        }
+    }
+}
+
+void MovingAverageInteractive::pricesOverDiffPeriods(vector<int> arr) {
+    vector<int>::iterator iter;
+    for(iter = arr.begin(); iter != arr.end(); ++iter){
+        cout << *iter << endl;
     }
 }
 
@@ -53,5 +82,4 @@ int main(){
     MovingAverageInteractive interactiveTradeview;
     interactiveTradeview.determineMovingAverage();
     interactiveTradeview.pricesOverDiffPeriods(arr);
-
 }
