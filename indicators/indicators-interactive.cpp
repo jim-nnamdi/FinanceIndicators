@@ -9,7 +9,7 @@ class MovingAverageInteractive {
         double determineMovingAverage();
 
         template<typename T>
-        void pricesOverPeriods(vector<T> arr);
+        void pricesOverDiffPeriods(vector<T> arr);
 };
 
 double MovingAverageInteractive::determineMovingAverage() {
@@ -18,8 +18,8 @@ double MovingAverageInteractive::determineMovingAverage() {
     int meanperiod;
 
     cout << "add prices to the moving average price stack"<<endl;
-    for(int o=0; o<5; o++){
-        cin >> arr;
+    for(int o=0; o < arrsize; o++){
+        cin >> arr[o];
     }
     cout << "input the mean moving period"<<endl;
     cin >> meanperiod;
@@ -41,17 +41,17 @@ double MovingAverageInteractive::determineMovingAverage() {
 }
 
 template<typename T>
-void pricesOverPeriods(vector<T> arr) {
+void pricesOverDiffPeriods(vector<T> arr) {
     for(auto& it : arr){
         cout << it << endl;
     }
 }
 
 int main(){
-    vector<double> arr = {1,2,3,4,5};
+    vector<int> arr = {1,2,3,4,5};
 
     MovingAverageInteractive interactiveTradeview;
     interactiveTradeview.determineMovingAverage();
-    interactiveTradeview.pricesOverPeriods(arr);
+    interactiveTradeview.pricesOverDiffPeriods(arr);
 
 }
