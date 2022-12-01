@@ -14,6 +14,7 @@
 #include<vector>
 #include <iomanip>
 
+template <class T>
 class LinearRegressionAnalysis {
 
     // y = a + bx
@@ -27,15 +28,16 @@ class LinearRegressionAnalysis {
     // solve for the standard deviation of x and y
     // in solving for the SD -> (x-_X) ^ 2 same as y
 
-    double a = 0.0;
-    double b = 0.0;
+    T yintercept = 0.0;
+    T slope = 0.0;
 
    public:
-   float solveLinearEquation(float yintercept, float slope, float predictor);
+   T solveLinearEquation(T yintercept, T slope, T predictor);
    void solveForLinearRegression(double x);
 };
 
-void LinearRegressionAnalysis::solveForLinearRegression(double x){
+template<class T>
+void LinearRegressionAnalysis<T>::solveForLinearRegression(double x){
      // using a dummy dataset
     static const int firstarraysize = 5;
     static const int secondarraysize = 5;
@@ -83,26 +85,27 @@ void LinearRegressionAnalysis::solveForLinearRegression(double x){
     int sdx = sqrt(resultofxmean/(firstarraysize-1));
     int sdy = sqrt(resultofymean/(secondarraysize-1));
 
-    b = (cou * (sdx/sdy));
+    yintercept = (cou * (sdx/sdy));
 
-    a = meanFds - (b * meanSds);
+    slope = meanFds - (yintercept * meanSds);
 
     // so we have our y-intercept now and slope
     // we can now solve for y for any value of x
     // using y = a + bx
 
-    float result = solveLinearEquation(a,b,x);
+    float result = solveLinearEquation(yintercept, slope, x);
     std::cout  << result << std::endl;
 }
 
-float LinearRegressionAnalysis::solveLinearEquation(float yintercept, float slope, float predictor) {
+template<class T>
+T LinearRegressionAnalysis<T>::solveLinearEquation(T yintercept, T slope, T predictor) {
     float target = yintercept + (slope * predictor);
     return target;
 }
 
 int main(){
 
-    LinearRegressionAnalysis lra;
+    LinearRegressionAnalysis<float> lra;
     std::cout << "---------- Linear Regression ----------" << std::endl;
     std::cout << "---------- Pass in preferred values of predictor ----------" << std::endl;
 
