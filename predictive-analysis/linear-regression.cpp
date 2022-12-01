@@ -27,16 +27,15 @@ class LinearRegressionAnalysis {
     // solve for the standard deviation of x and y
     // in solving for the SD -> (x-_X) ^ 2 same as y
 
-    double y = 0.0;
     double a = 0.0;
     double b = 0.0;
-    double x = 0.0;
 
    public:
-   void solveForSlope();
+   float solveLinearEquation(float yintercept, float slope, float predictor);
+   void solveForLinearRegression(double x);
 };
 
-void LinearRegressionAnalysis::solveForSlope(){
+void LinearRegressionAnalysis::solveForLinearRegression(double x){
      // using a dummy dataset
     static const int firstarraysize = 5;
     static const int secondarraysize = 5;
@@ -79,20 +78,35 @@ void LinearRegressionAnalysis::solveForSlope(){
     productOfxySquareResult = squareofxmean * squareofymean;
 
     // pension covariance coefficient
-    float cou = (float)(productOfxyresult/productOfxySquareResult);
-
-    // standard deviation
+    float cou = productOfxyresult/(float)productOfxySquareResult;
 
     int sdx = sqrt(resultofxmean/(firstarraysize-1));
     int sdy = sqrt(resultofymean/(secondarraysize-1));
 
-    b = (double) (cou * (sdx/sdy));
+    b = (cou * (sdx/sdy));
 
-    std::cout  << cou << std::endl;
+    a = meanFds - (b * meanSds);
+
+    // so we have our y-intercept now and slope
+    // we can now solve for y for any value of x
+    // using y = a + bx
+
+    float result = solveLinearEquation(a,b,x);
+    std::cout  << result << std::endl;
+}
+
+float LinearRegressionAnalysis::solveLinearEquation(float yintercept, float slope, float predictor) {
+    float target = yintercept + (slope * predictor);
+    return target;
 }
 
 int main(){
-    std::cout << "Hello" << std::endl;
+
     LinearRegressionAnalysis lra;
-    lra.solveForSlope();
+    std::cout << "---------- Linear Regression ----------" << std::endl;
+    std::cout << "---------- Pass in preferred values of predictor ----------" << std::endl;
+
+    double predictor;
+    std::cin >> predictor;
+    lra.solveForLinearRegression(predictor);
 }
