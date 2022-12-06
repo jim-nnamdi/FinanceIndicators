@@ -6,9 +6,10 @@
 template<class T>
 class LoanPredictor {
     // amount -> duration -> interest
-    const T& amount;
-    const T& duration;
-    const T& interest;
+    // initialize class values <private>
+     const T amount = 100;
+     const T duration = 8;
+     const T interest = 10;
 
     const T loantime = 1;
     const T minamount = 100;
@@ -19,29 +20,26 @@ class LoanPredictor {
 
 template<class T>
 T LoanPredictor<T>::simpleInterest(T principal, T rate, T time){
-        T loan_duration = [](duration) {
+        //duration -> [this can be relative]
             if(duration < time){
                 std::cout<<"please extend loan payment period"<< std::endl;
-                return rate;
+                return time;
             }
-            return loantime;
-        };
 
-        T loan_amount = [](){
-            if (amount <= principal) {
+            if (principal <= amount) {
             std::cout << "min amount of loan not taken" << std::endl;
             return minamount;
+            } else {
+                return principal;
             }
-            return amount;
-        };
 
-        T interest  = loan_amount * rate * time;
-        return T;
-    }
+        T interest  = (principal * rate * time)/100;
+        return interest;
+}
 
 int main(){
-    LoanPredictor<int> loan;
-    int paymentPlanAfterSixMonths = loan.simpleInterest(1000,25,6);
+    LoanPredictor<int> loanclass;
+    int paymentPlanAfterSixMonths = loanclass.simpleInterest(1000,25,6);
     std::cout<<paymentPlanAfterSixMonths<<std::endl;
     return 0;
 }
