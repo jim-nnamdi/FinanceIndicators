@@ -24,6 +24,6 @@ T Accounts<T>::accountsCreated(int num, ...){
 
 int main(){
     Accounts<double> a;
-    double xx = a.accountsCreated(4,5,6,7,8,8,9);
-    cout << "average of created accounts" <<  xx << endl;
+    cout << "average of created accounts" <<  
+    a.accountsCreated(4,5,6,7,8,8,9) << endl;
 }
