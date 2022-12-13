@@ -8,19 +8,19 @@ using namespace std;
 template<class T>
 class Area {
   public:
-  T areaOfSquare(T base);
+  T areaOfSquare(T side);
   T areaOfTriangle(T base, T height);
   T areaOfCircle(double pi, double radius);  
 };
 
 template<class T>
-T Area<T>::areaOfSquare(T base){
+T Area<T>::areaOfSquare(T side){
 
     /**
      * we can also use the math lib
-     * to solve for this pow(base, base)
+     * to solve for this pow(side, side)
      */
-    T area = base * base;
+    T area = side * side;
     return area;
 }
 
