@@ -1,7 +1,6 @@
 //assignment for csc 226
 
 #include<iostream>
-#include<vector>
 
 using namespace std;
 
