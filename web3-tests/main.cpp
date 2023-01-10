@@ -17,3 +17,21 @@ size_t cx::Cl::post_callback(void *contents, size_t size, size_t nobj, void *use
     memx->memory[memx->size] = 0;
     return realsize;
 }
+
+struct mex {
+    char * mem;
+    int size;
+};
+
+size_t writecallback(void *contents, size_t size, size_t nmemb, void *userptr) {
+    size_t realsize = size * nmemb;
+    struct mex *memx = (struct mex *)userptr;
+    char * ptr = (char *) realloc(memx->mem, memx->size + realsize + 1);
+    if(!ptr) cerr << "realloc failed" << endl; return 0;
+
+    memx->mem = ptr;
+    memcpy(&(memx->mem[memx->size]), contents, realsize);
+    memx->size = realsize;
+    memx->mem[memx->size] = 0;
+    return realsize;
+}
